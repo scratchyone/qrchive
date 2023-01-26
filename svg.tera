@@ -1,0 +1,33 @@
+<?xml version="1.0" standalone="yes"?>
+{% set padding_x = 10 -%} {% set padding_y = 10 -%} {% set code_width = 100 -%}
+{% set code_height = 100 -%} {% set gap_x = 0 -%} {% set gap_y = 10 -%}
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  viewBox="0 0 {{ cols * (code_width + gap_x) + padding_x * 2 }} {{
+    rows * (code_height + gap_y) + padding_y * 2
+  }}"
+  shape-rendering="crispEdges"
+>
+  <rect width="100%" height="100%" fill="#fff" />
+  {% for code in codes %}
+  <text
+    x="{{ code.c * (code_width + gap_x) + padding_x + 3 }}"
+    y="{{ code.r * (code_height + gap_y) + padding_y }}"
+    style="
+      font-size: 6px;
+      font-family: system-ui, 'San Francisco', Helvetica, Arial, san-serif;
+      color: #9c9c9c;
+    "
+  >
+    {{ code.label }}
+  </text>
+  <image
+    x="{{ code.c * (code_width + gap_x) + padding_x }}"
+    y="{{ code.r * (code_height + gap_y) + padding_y }}"
+    width="{{ code_width }}"
+    height="{{ code_height }}"
+    href="{{ code.href }}"
+  />
+  {% endfor %}
+</svg>
